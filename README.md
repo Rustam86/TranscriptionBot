@@ -23,8 +23,35 @@ Instructions:
       6. Once you have provided the necessary information, BotFather will create your bot and provide you with an API token. The API token is a long string of characters (e.g., "1234567890:ABCdefGHIjklMnoPqrStuvwXYz").
       7. Copy the API token provided by BotFather. This token is unique to your bot and will be used to authenticate your bot's requests to the Telegram API
 
-   - Telegraph access token: Register an account on Telegraph and obtain the access token (https://telegra.ph/).
+   - Telegraph access token: Register an account on Telegraph and obtain the access token (https://telegra.ph/):
+      1. Make a POST request to the createAccount endpoint with the necessary parameters:
+         Endpoint: https://api.telegra.ph/createAccount
+         HTTP Method: POST
+         Parameters:
+         short_name (required): Your desired short name for the account (unique identifier used in the account's URL).
+         author_name (optional): The author name associated with the account.
+         ```
+         endpoint = "https://api.telegra.ph/createAccount"
+         data = {
+         "short_name": "YourShortName",
+         "author_name": "YourAuthorName"
+         }
+         response = requests.post(endpoint, data=data)
+         ```
+      2. Handle the response to obtain the access token:
+         ```
+         if response.status_code == 200:
+             access_token = response.json().get("access_token")
+             print("Access token:", access_token)
+         else:
+             print("Account creation failed. Status code:", response.status_code)
+         ```
    - OpenAI API key: Sign up for OpenAI and obtain the API key (https://openai.com/).
+      1. Go to the OpenAI website (https://openai.com/) and sign up for an account. Provide the necessary information and complete the registration process.
+      2. Once you have successfully signed up and logged in to your OpenAI account, navigate to the API section. You can typically find it in the account dashboard or in the developer settings.
+      3. In the API section, you should find an option to generate an API key. Click on that option to create a new API key.
+      4. After generating the API key, it will be displayed on your screen. Copy the API key and securely store it in a safe location.
+
 3. Replace the placeholder API credentials in the code with your own.
 4. Run the script: python bot.py.
 5. Start a conversation with your bot on Telegram.
