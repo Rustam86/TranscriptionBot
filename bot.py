@@ -147,6 +147,8 @@ def handle_message(update, context):
     message_text = update.message.text
 
     if is_youtube_link(message_text):
+        please_wait_message = "Hold on tight! 🎧 Our transcription gnomes are diligently working to decode the audio magic of your video." \
+                      "⏳ It might take a moment, but we promise it'll be worth the wait! 😊"
         pages = process_text(message_text)
         for page in pages:
             bot.send_message(chat_id=update.effective_chat.id, text=page)
